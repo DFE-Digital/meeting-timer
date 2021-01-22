@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingTimer", "MeetingTimer\MeetingTimer.csproj", "{3662267B-D566-4A95-BD4C-CF0BD175AA37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingTimerTests", "XUnitTestProject1\MeetingTimerTests.csproj", "{A05B7EAA-6DA2-4DA9-8DEE-9F812CAA9692}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingTimerTests", "MeetingTimerTests\MeetingTimerTests.csproj", "{A05B7EAA-6DA2-4DA9-8DEE-9F812CAA9692}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
