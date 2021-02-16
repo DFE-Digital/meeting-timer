@@ -65,10 +65,9 @@ jobs:
         with:
           build-args: BUILDKIT_INLINE_CACHE=1
           cache-from: |
-            ${{ env.DOCKERHUB_REPOSITORY_BASE }}${{ env.DOCKERHUB_ENV }}:builder
+            ${{ env.DOCKERHUB_REPOSITORY_BASE }}${{ env.DOCKERHUB_ENV }}
           push: true
-          tags: ${{ env.DOCKERHUB_REPOSITORY_BASE }}${{ env.DOCKERHUB_ENV }}:builder
-          target: builder
+          tags: ${{ env.DOCKERHUB_REPOSITORY_BASE }}${{ env.DOCKERHUB_ENV }}
 
       - name: Deploy review app to dev
         if: ${{ startsWith(github.event.inputs.environment, 'review') }}
