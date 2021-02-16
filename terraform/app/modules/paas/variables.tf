@@ -45,8 +45,5 @@ locals {
     local.app_env_domain,
     var.app_env_values #Because of merge order, if present, the value of DOMAIN in .tfvars will overwrite app_env_domain
   )
-  app_service_bindings = concat(
-    local.app_cloudfoundry_service_instances,
-  )
   web_app_name             = "${var.service_name}-${var.environment}"
 }

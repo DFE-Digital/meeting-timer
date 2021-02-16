@@ -11,12 +11,6 @@ resource cloudfoundry_app web_app {
   stopped = var.app_stopped
   strategy = var.web_app_deployment_strategy
   timeout = var.app_start_timeout
-  dynamic "service_binding" {
-    for_each = local.app_service_bindings
-    content {
-      service_instance = service_binding.value
-    }
-  }
   routes {
     route = cloudfoundry_route.web_app_route.id
   }
