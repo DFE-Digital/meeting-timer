@@ -58,7 +58,7 @@ jobs:
       - name: Set dockerhub repo
         run: |
           ENVIRONMENT=${{ github.event.inputs.environment }}
-          if [[ "$ENVIRONMENT" == *"review"* ]]; then DOCKERHUB_ENV=dev; else DOCKERHUB_ENV=$ENVIRONMENT; fi
+          if [[ "$ENVIRONMENT" == *"review"* ]]; then DOCKERHUB_ENV=-dev; else DOCKERHUB_ENV=$ENVIRONMENT; fi
           echo "DOCKERHUB_ENV=$DOCKERHUB_ENV" >> $GITHUB_ENV
       - name: Build and push docker image from builder target
         uses: docker/build-push-action@v2
