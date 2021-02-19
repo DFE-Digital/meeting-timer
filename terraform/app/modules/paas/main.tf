@@ -4,6 +4,7 @@ resource cloudfoundry_app web_app {
   docker_image = var.app_docker_image
   health_check_type = "http"
   health_check_http_endpoint = "/check"
+  health_check_timeout = 180
   instances = var.web_app_instances
   memory = var.web_app_memory
 
