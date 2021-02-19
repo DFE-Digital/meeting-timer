@@ -1,11 +1,16 @@
+using MeetingTimer.Data;
+using MeetingTimer.Repositories;
+using MeetingTimer.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace MeetingTimer
 {
@@ -38,6 +43,8 @@ namespace MeetingTimer
             );
 
             services.AddDbContext<MeetingTimerContext>();
+
+            services.AddScoped<ISessionRepository, SessionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
