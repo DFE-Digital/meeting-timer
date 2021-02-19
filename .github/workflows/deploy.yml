@@ -79,5 +79,5 @@ jobs:
         run: |
           export TF_VAR_paas_app_docker_image=${{ env.DOCKERHUB_REPOSITORY_BASE }}${{ env.DOCKERHUB_ENV }}:${{ env.TAG }}
           cd terraform/app
-          terraform init -reconfigure -input=false -backend-config="paas-s3-broker-prod-lon-2edd2438-84c1-4190-a994-350c7a86afe4" -backend-config="key=${{ github.event.inputs.environment }}/terraform.tfstate"
+          terraform init -reconfigure -input=false -backend-config="bucket=paas-s3-broker-prod-lon-2edd2438-84c1-4190-a994-350c7a86afe4" -backend-config="key=${{ github.event.inputs.environment }}/terraform.tfstate"
           terraform apply -input=false -auto-approve -var-file ../workspace-variables/review.tfvars -var='environment=${{github.event.inputs.environment}}'

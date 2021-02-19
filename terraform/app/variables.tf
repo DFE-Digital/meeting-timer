@@ -61,7 +61,7 @@ variable paas_web_app_memory {
 }
 
 variable paas_web_app_start_command {
-  default = "dotnet run"
+  default = "dotnet MeetingTimer.dll"
 }
 
 variable paas_worker_app_deployment_strategy {

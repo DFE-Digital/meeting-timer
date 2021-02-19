@@ -16,6 +16,15 @@ provider cloudfoundry {
 
 }
 
+terraform {
+
+  backend "s3" {
+    key     = "terraform.tfstate"
+    region  = "eu-west-2"
+    encrypt = "true"
+  }
+}
+
 /*
 Store infrastructure state in a remote store (instead of local machine):
 https://www.terraform.io/docs/state/purpose.html
