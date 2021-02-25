@@ -100,3 +100,27 @@ To update the database by applying pending migrations:
 ```js
 dotnet ef database update
 ```
+
+# Linting
+
+Prettier is used for code formatting. To enforce stylistic rules with Prettier, run:
+
+```js
+# To format a file:
+npx prettier <PATH TO YOUR FILE>
+
+# To format the src folder:
+npm run prettier
+```
+
+ESLint is used for static analysis of JavaScript code quality. It is configured to ignore stylistic rules that conflict with Prettier.
+
+```js
+# To lint a file:
+npx eslint <PATH TO YOUR FILE>
+
+# To lint the src folder:
+npm run lint
+```
+
+Append `--write` or `--fix` to prettier and eslint commands respectively to automatically fix, where possible, any problems detected.
