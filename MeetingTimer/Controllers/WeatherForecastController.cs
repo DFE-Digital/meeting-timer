@@ -35,10 +35,5 @@ namespace MeetingTimer.Controllers
             })
             .ToArray();
         }
-
-        public string GetTest()
-        {
-            return "test";
-        }
     }
 }

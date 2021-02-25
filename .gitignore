@@ -243,3 +243,7 @@ terraform.tfstate.d/
 .terraform.tfstate.lock.info
 .terraform.lock.hcl
 tokens
+
+*.db
+*.db-shm
+*.db-wal
