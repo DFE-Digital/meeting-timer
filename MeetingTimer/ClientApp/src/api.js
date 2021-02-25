@@ -1,11 +1,13 @@
 export const post = async (path, data = {}) => {
   const response = await fetch(path, {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify(data),
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
   });
-  return await response.json();
+  return response.json();
 };
+
+export const get = () => {};
