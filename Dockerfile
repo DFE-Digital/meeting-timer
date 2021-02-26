@@ -1,7 +1,6 @@
 # https://hub.docker.com/_/microsoft-dotnet
 FROM mcr.microsoft.com/dotnet/sdk:5.0.102-ca-patch-buster-slim AS build-env
 
-ARG BUILD_CONFIGURATION=Debug
 ENV ASPNETCORE_URLS=http://+:8080  
 
 # Install node.js
