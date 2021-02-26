@@ -11,3 +11,7 @@ data cloudfoundry_space space {
 data cloudfoundry_domain cloudapps_digital {
   name = "london.cloudapps.digital"
 }
+
+data cloudfoundry_service postgres {
+  name = "postgres"
+}
