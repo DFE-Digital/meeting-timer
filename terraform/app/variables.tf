@@ -86,5 +86,5 @@ locals {
     var.secret_paas_app_env_values
   )
   is_production = var.environment == "production"
-  service_name = "meetingtimer"
+  service_name = "meeting-timer"
 }
