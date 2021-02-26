@@ -58,25 +58,39 @@ jobs:
       - name: Set dockerhub repo
         run: |
           ENVIRONMENT=${{ github.event.inputs.environment }}
-          if [[ "$ENVIRONMENT" == *"review"* ]]; then DOCKERHUB_ENV=dev; else DOCKERHUB_ENV=$ENVIRONMENT; fi
+          if [[ "$ENVIRONMENT" == *"review"* ]]; then DOCKERHUB_ENV=-dev; else DOCKERHUB_ENV=$ENVIRONMENT; fi
           echo "DOCKERHUB_ENV=$DOCKERHUB_ENV" >> $GITHUB_ENV
       - name: Build and push docker image from builder target
         uses: docker/build-push-action@v2
         with:
-          build-args: BUILDKIT_INLINE_CACHE=1
-          cache-from: |
-            ${{ env.DOCKERHUB_REPOSITORY_BASE }}${{ env.DOCKERHUB_ENV }}:builder
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            VERSION=${{ env.TAG }}
           push: true
-          tags: ${{ env.DOCKERHUB_REPOSITORY_BASE }}${{ env.DOCKERHUB_ENV }}:builder
-          target: builder
+          tags: ${{ env.DOCKERHUB_REPOSITORY_BASE }}${{ env.DOCKERHUB_ENV }}:${{ env.TAG }}
 
-      - name: Deploy review app to dev
-        if: ${{ startsWith(github.event.inputs.environment, 'review') }}
+      - name: Deploy to Dev    
+        if: ${{ github.event.inputs.environment == 'dev' }}
         env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           TF_VAR_paas_user: ${{ secrets.GOVPAAS_DEV_USERNAME }}
           TF_VAR_paas_password: ${{ secrets.GOVPAAS_DEV_PASSWORD }}
         run: |
           export TF_VAR_paas_app_docker_image=${{ env.DOCKERHUB_REPOSITORY_BASE }}${{ env.DOCKERHUB_ENV }}:${{ env.TAG }}
           cd terraform/app
-          terraform init -reconfigure -input=false
+          terraform init -reconfigure -input=false -backend-config="bucket=paas-s3-broker-prod-lon-2edd2438-84c1-4190-a994-350c7a86afe4"
+          terraform apply -input=false -auto-approve -var-file ../workspace-variables/dev.tfvars
+
+      - name: Deploy review app to dev
+        if: ${{ startsWith(github.event.inputs.environment, 'review') }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_paas_user: ${{ secrets.GOVPAAS_DEV_USERNAME }}
+          TF_VAR_paas_password: ${{ secrets.GOVPAAS_DEV_PASSWORD }}
+        run: |
+          export TF_VAR_paas_app_docker_image=${{ env.DOCKERHUB_REPOSITORY_BASE }}${{ env.DOCKERHUB_ENV }}:${{ env.TAG }}
+          cd terraform/app
+          terraform init -reconfigure -input=false -backend-config="bucket=paas-s3-broker-prod-lon-2edd2438-84c1-4190-a994-350c7a86afe4" -backend-config="key=${{ github.event.inputs.environment }}/terraform.tfstate"
           terraform apply -input=false -auto-approve -var-file ../workspace-variables/review.tfvars -var='environment=${{github.event.inputs.environment}}'
