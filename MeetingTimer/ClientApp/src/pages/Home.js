@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from 'govuk-react';
 import { post } from '../api';
 
 const Home = () => {
@@ -15,13 +14,13 @@ const Home = () => {
 
   return (
     <div>
-      <Button onClick={() => beginSession()}>Begin session</Button>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        session && <p>{`Started session number ${session}`}</p>
-      )}
-    </div>
+          <button className="govuk-button" type="submit" onClick={() => beginSession()}>Begin session</button>
+          {loading ? (
+              <p>Loading...</p>
+          ) : (
+                  session && <p>{`Started session number ${session}`}</p>
+              )}
+      </div>
   );
 };
 
