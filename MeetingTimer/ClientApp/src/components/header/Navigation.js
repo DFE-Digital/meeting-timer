@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { initAll } from 'govuk-frontend';
 
-const Navigation = () => (
+const Navigation = () => {
+  useEffect(() => initAll());
+return (
   <nav>
     <ul
       id="navigation"
@@ -15,6 +18,7 @@ const Navigation = () => (
       </li>
     </ul>
   </nav>
-);
+  );
+};
 
 export default Navigation;
