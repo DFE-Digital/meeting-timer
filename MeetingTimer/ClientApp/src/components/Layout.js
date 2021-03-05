@@ -1,10 +1,8 @@
 import React from 'react';
 import { initAll } from 'govuk-frontend';
 import '../main.scss';
-import Header from './Header';
+import Header from './header/Header';
 import Footer from './Footer';
-
-
 
 const Layout = (props) => {
   const { children } = props;
@@ -12,8 +10,8 @@ const Layout = (props) => {
   return (
     <div>
       <Header />
-          {children}
-  
+      {children}
+
       <Footer />
     </div>
   );
