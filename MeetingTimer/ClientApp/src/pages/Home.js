@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import useGovUKFrontend from '../utils/initialiseComponent'
 import { post } from '../api';
 
 const Home = () => {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(false);
+  const inputEl = useGovUKFrontend();
 
   const beginSession = async () => {
     setLoading(true);
@@ -13,7 +15,7 @@ const Home = () => {
   };
 
   return (
-    <div className="govuk-width-container">
+    <div className="govuk-width-container" ref={inputEl}>
       <main className="govuk-main-wrapper">
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds">
