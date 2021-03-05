@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from 'govuk-react';
 import { post } from '../api';
 
 const Home = () => {
@@ -14,13 +13,28 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <Button onClick={() => beginSession()}>Begin session</Button>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        session && <p>{`Started session number ${session}`}</p>
-      )}
+    <div className="govuk-width-container">
+      <main className="govuk-main-wrapper">
+        <div className="govuk-grid-row">
+          <div className="govuk-grid-column-two-thirds">
+            <h1 className="govuk-heading-xl">Start a session</h1>
+            <div>
+              <button
+                className="govuk-button"
+                type="button"
+                onClick={() => beginSession()}
+              >
+                Begin session
+              </button>
+              {loading ? (
+                <p>Loading...</p>
+              ) : (
+                session && <p>{`Started session number ${session}`}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 };
