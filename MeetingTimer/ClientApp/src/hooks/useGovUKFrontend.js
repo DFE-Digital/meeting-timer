@@ -9,7 +9,7 @@ const useGovUKFrontend = () => {
         scope: ref.current,
       });
     }
-  });
+  }, []);
   return ref;
 };
 
