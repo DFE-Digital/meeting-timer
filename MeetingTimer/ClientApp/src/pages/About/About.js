@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AccordionItem from '../components/AccordionItem';
-import useGovUKFrontend from '../hooks/useGovUKFrontend';
+import AccordionItem from '../../components/AccordionItem';
+import useGovUKFrontend from '../../hooks/useGovUKFrontend';
 
 const About = () => {
   const ref = useGovUKFrontend();
