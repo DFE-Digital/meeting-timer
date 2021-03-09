@@ -4,6 +4,7 @@ using MeetingTimer.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -42,7 +43,8 @@ namespace MeetingTimer
                 configuration.RootPath = "ClientApp/build"
             );
 
-            services.AddDbContext<MeetingTimerContext>();
+            var sqlConnectionString = Configuration["MeetingTimerConnectionString"];
+            services.AddEntityFrameworkNpgsql().AddDbContext<MeetingTimerContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("MeetingTimerConnectionString")));
 
             services.AddScoped<ISessionRepository, SessionRepository>();
         }
