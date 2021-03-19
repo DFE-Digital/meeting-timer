@@ -1,5 +1,8 @@
 ![.Net](https://github.com/DFE-Digital/meeting-timer/workflows/.NET/badge.svg)
 
+![React](https://github.com/DFE-Digital/meeting-timer/workflows/react.yml/badge.svg)
+
+
 # MeetingTimer
 
 MeetingTimer is a... It uses...
