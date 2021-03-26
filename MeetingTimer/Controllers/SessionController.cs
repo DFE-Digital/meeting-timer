@@ -1,4 +1,4 @@
-using MeetingTimer.Repositories.Interfaces;
+﻿using MeetingTimer.Repositories.Interfaces;
 using MeetingTimer.ResponseModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -38,9 +38,34 @@ namespace MeetingTimer.Controllers
                 HostId = session.HostId,
             };
 
-            return CreatedAtAction("GetSession", response);
-            // TODO: use nameof(GetSession) when implemented
-            // actionName should give the location of the newly created session
+            return CreatedAtAction(
+                actionName: nameof(GetSession),
+                routeValues: new { id = response.SessionId },
+                value: response);
+        }
+
+        /// <summary>
+        /// Get a session by Id
+        /// </summary>
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SessionResponse))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<SessionResponse>> GetSession(int id)
+        {
+            var session = await _sessionRepository.GetSessionById(id);
+
+            if (session == null)
+            {
+                return NotFound();
+            }
+
+            var response = new SessionResponse()
+            {
+                SessionId = session.SessionId,
+                HostId = session.HostId,
+            };
+
+            return Ok(response);
         }
     }
 }

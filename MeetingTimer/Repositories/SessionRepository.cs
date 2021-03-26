@@ -31,5 +31,9 @@ namespace MeetingTimer.Repositories
             return newSession;
         }
 
+        public async Task<Session> GetSessionById(int id)
+        {
+            return await _context.Sessions.FindAsync(id);
+        }
     }
 }
