@@ -10,17 +10,24 @@ namespace MeetingTimerTests.Controllers
 {
     public class SessionControllerTests
     {
+        private readonly Mock<ISessionRepository> _mockRepository;
+        private readonly SessionController _controller;
+
+        public SessionControllerTests()
+        {
+            _mockRepository = new Mock<ISessionRepository>();
+            _controller = new SessionController(_mockRepository.Object);
+        }
+
         [Fact]
         public async Task CreateSession_WhenModelIsValid_ReturnsCreatedResponse()
         {
             var session = new Session();
-            var mockRepository = new Mock<ISessionRepository>();
-            mockRepository
+            _mockRepository
                 .Setup(repo => repo.CreateSession())
                 .ReturnsAsync(session);
-            var controller = new SessionController(mockRepository.Object);
 
-            var response = await controller.CreateSession();
+            var response = await _controller.CreateSession();
 
             Assert.IsType<CreatedAtActionResult>(response.Result);
         }
@@ -28,11 +35,9 @@ namespace MeetingTimerTests.Controllers
         [Fact]
         public async Task CreateSession_GivenInvalidModel_ReturnsBadRequest()
         {
-            var mockRepository = new Mock<ISessionRepository>();
-            var controller = new SessionController(mockRepository.Object);
-            controller.ModelState.AddModelError("error", "some error");
+            _controller.ModelState.AddModelError("error", "some error");
 
-            var response = await controller.CreateSession();
+            var response = await _controller.CreateSession();
 
             Assert.IsType<BadRequestResult>(response.Result);
         }
