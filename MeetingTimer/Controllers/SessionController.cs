@@ -1,4 +1,4 @@
-﻿using MeetingTimer.Repositories.Interfaces;
+using MeetingTimer.Repositories.Interfaces;
 using MeetingTimer.ResponseModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +27,7 @@ namespace MeetingTimer.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
             var session = await _sessionRepository.CreateSession();

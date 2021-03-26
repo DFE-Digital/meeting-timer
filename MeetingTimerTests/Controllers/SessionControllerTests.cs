@@ -1,6 +1,7 @@
-﻿using MeetingTimer.Controllers;
+using MeetingTimer.Controllers;
 using MeetingTimer.Models;
 using MeetingTimer.Repositories.Interfaces;
+using MeetingTimer.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Threading.Tasks;
@@ -20,26 +21,38 @@ namespace MeetingTimerTests.Controllers
         }
 
         [Fact]
-        public async Task CreateSession_WhenModelIsValid_ReturnsCreatedResponse()
+        public async Task CreateSession_WhenModelIsValid_ReturnsCreatedSessionResponse()
         {
-            var session = new Session();
+            const int sessionId = 1;
+            var session = new Session
+            {
+                SessionId = sessionId,
+            };
+
             _mockRepository
                 .Setup(repo => repo.CreateSession())
                 .ReturnsAsync(session);
 
             var response = await _controller.CreateSession();
 
-            Assert.IsType<CreatedAtActionResult>(response.Result);
+            var createdResponse = Assert.IsType<CreatedAtActionResult>(response.Result);
+            var sessionResponse = Assert.IsType<SessionResponse>(createdResponse.Value);
+            Assert.Equal(expected: sessionId, actual: sessionResponse.SessionId);
         }
 
         [Fact]
         public async Task CreateSession_GivenInvalidModel_ReturnsBadRequest()
         {
-            _controller.ModelState.AddModelError("error", "some error");
+            const string errorKey = "Error";
+            const string errorMessage = "Message";
+            _controller.ModelState.AddModelError(errorKey, errorMessage);
 
             var response = await _controller.CreateSession();
 
-            Assert.IsType<BadRequestResult>(response.Result);
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(response.Result);
+            var errors = Assert.IsType<SerializableError>(badRequestResult.Value);
+            Assert.True(errors.ContainsKey(errorKey));
+            Assert.Equal(expected: errorMessage, actual: (errors[errorKey] as string[])[0]);
         }
     }
 }
