@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace MeetingTimer.Utils
+{
+    public interface IEnv
+    {
+        bool IsDevelopment { get; }
+        bool IsStaging { get; }
+        bool IsProduction { get; }
+        bool IsTest { get; }
+        bool ExportHangireToPrometheus { get; }
+        string GitCommitSha { get; }
+        string DatabaseInstanceName { get; }
+        string HangfireInstanceName { get; }
+        string EnvironmentName { get; }
+        string TotpSecretKey { get; }
+        string VcapServices { get; }
+        string CrmServiceUrl { get; }
+        string CrmClientId { get; }
+        string CrmClientSecret { get; }
+        string NotifyApiKey { get; }
+        string GoogleApiKey { get; }
+        bool IsMasterInstance { get; }
+
+        string Get(string variable);
+    }
+}
