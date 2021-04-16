@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -12,7 +12,9 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_INSTANCE_NAME": "meetingtimerDb",
+        "VCAP_SERVICES": "{\"Postgres\":[{\"instance_name\":\"meetingtimerDb\",\"Credentials\":{\"Host\":\"localhost\",\"Name\":\"meetingtimerDb\",\"Username\":\"meetingtimer\",\"Password\":\"dfepostgres\",\"Port\": 5432}}]}"
       }
     },
     "MeetingTimer": {
