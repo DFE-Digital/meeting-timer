@@ -15,7 +15,7 @@ MeetingTimer is a... It uses...
 
 To confirm that the prerequisites are installed, the following commands should return a version number:
 
-```js
+```bash
 dotnet --version
 node --version
 npm --version
@@ -26,7 +26,7 @@ dotnet ef --version
 
 Clone the project:
 
-```js
+```bash
 git clone https://github.com/DFE-Digital/meeting-timer.git
 ```
 
@@ -36,7 +36,7 @@ Navigate to `./MeetingTimer`
 
 Restore the .NET project dependencies:
 
-```js
+```bash
 dotnet restore
 ```
 
@@ -46,7 +46,7 @@ Navigate to `./MeetingTimer/ClientApp`
 
 Install Node.js dependencies:
 
-```js
+```bash
 npm install
 ```
 
@@ -56,13 +56,13 @@ npm install
 
 2. Run the application. Navigate to `./MeetingTimer`:
 
-```js
+```bash
 dotnet run
 ```
 
 3. The app will be available at:
 
-```js
+```bash
 https://localhost:5001/
 ```
 
@@ -72,7 +72,7 @@ https://localhost:5001/
 
 To view the interactive documentation with SwaggerUI go to:
 
-```js
+```bash
 https://localhost:<PORT>/api-documentation
 ```
 
@@ -80,7 +80,7 @@ https://localhost:<PORT>/api-documentation
 
 In order to use the Entity Framework core CLI tools they must first be installed. See [prerequisites](#prerequisites), or run:
 
-```js
+```bash
 dotnet tool install --global dotnet-ef
 ```
 
@@ -90,7 +90,7 @@ First navigate to `./MeetingTimer`
 
 Migration names should be descriptive and in the imperative mood. You will not need to specifiy the output directory; new migrations will follow the previous migration located at `./MeetingTimer/Data/Migrations`. To add a migration:
 
-```js
+```bash
 dotnet ef migrations add <NAME OF MIGRATION>
 ```
 
@@ -98,7 +98,7 @@ dotnet ef migrations add <NAME OF MIGRATION>
 
 To update the database by applying pending migrations:
 
-```js
+```bash
 dotnet ef database update
 ```
 
@@ -106,7 +106,7 @@ dotnet ef database update
 
 Prettier is used for code formatting. To enforce stylistic rules with Prettier, run:
 
-```js
+```bash
 # To format a file:
 npx prettier <PATH TO YOUR FILE>
 
@@ -116,7 +116,7 @@ npm run prettier
 
 ESLint is used for static analysis of JavaScript code quality. It is configured to ignore stylistic rules that conflict with Prettier.
 
-```js
+```bash
 # To lint a file:
 npx eslint <PATH TO YOUR FILE>
 
