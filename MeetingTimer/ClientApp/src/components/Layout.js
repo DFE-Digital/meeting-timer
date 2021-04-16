@@ -1,6 +1,6 @@
 import React from 'react';
 import '../main.scss';
-import Header from './header/Header';
+import Header from './Header/Header';
 import Footer from './Footer';
 
 const Layout = (props) => {
