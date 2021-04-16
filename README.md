@@ -1,6 +1,4 @@
-![.Net](https://github.com/DFE-Digital/meeting-timer/workflows/.NET/badge.svg)
-
-![React](https://github.com/DFE-Digital/meeting-timer/workflows/react.yml/badge.svg)
+![.Net](https://github.com/DFE-Digital/meeting-timer/workflows/.NET/badge.svg) ![React](https://github.com/DFE-Digital/meeting-timer/workflows/React/badge.svg)
 
 
 # MeetingTimer
