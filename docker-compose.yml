@@ -1,33 +1,15 @@
-version: "3.6"
+version: "3.8"
 services:
-  db:
-    image: postgres:9.6-alpine
+  postgres:
+    image: kartoza/postgis:12.0
+    environment:
+      - POSTGRES_DBNAME=MeetingTimerDb
     volumes:
-      - db_data:/var/lib/postgresql/data
-    environment:
-      PG_CONNECTION_STRING: Username=postgres;Password=devpassword;Host=localhost;Port=5432;Database=MeetingTimerDb
-  redis:
-    image: redis:alpine
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: meeting-timer
+      - db-data:/var/lib/postgresql
+    restart: on-failure
+    healthcheck:
+      test: "exit 0"
     ports:
-      - "5000:5000"
-    depends_on:
-      - db
-      - redis
-    environment:
-      - SERVICE_TYPE=web
-      - DB_HOSTNAME=db
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=devpassword
-      - DB_DATABASE=MeetingTimerDb
-      - DB_PORT=5432
-      - REDIS_URL=redis://redis:6379/1
-    env_file:
-      - .env
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && npm start -b 0.0.0.0"
+      - "5432:5432"
 volumes:
-  db_data:
+  db-data:
