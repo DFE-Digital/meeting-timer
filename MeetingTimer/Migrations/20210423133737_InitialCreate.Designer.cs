@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace MeetingTimer.Data.Migrations
+namespace MeetingTimer.Migrations
 {
     [DbContext(typeof(MeetingTimerContext))]
-    [Migration("20210305162214_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210423133737_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -15,81 +15,82 @@ using System.Reflection;
 
 namespace MeetingTimer
 {
- public class Startup
- {
-  public Startup(IConfiguration configuration)
-  {
-   Configuration = configuration;
-  }
-
-  public IConfiguration Configuration { get; }
-
-  // This method gets called by the runtime. Use this method to add services to the container.
-  public void ConfigureServices(IServiceCollection services)
-  {
-
-   services.AddControllersWithViews();
-   services.AddSwaggerGen(c =>
-   {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MeetingTimer", Version = "v1" });
-
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
-   });
-
-   // In production, the React files will be served from this directory
-   services.AddSpaStaticFiles(configuration =>
-       configuration.RootPath = "ClientApp/build"
-   );
-
-   services.AddEntityFrameworkNpgsql().AddDbContext<MeetingTimerContext>(opt => opt.UseNpgsql(Configuration["PG_CONNECTION_STRING"]));
-
-   services.AddScoped<ISessionRepository, SessionRepository>();
-  }
-
-  // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-  public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-  {
-   if (env.IsDevelopment())
-   {
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
+    public class Startup
     {
-     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Meetingtimer v1");
-     c.RoutePrefix = "api-documentation";
-    });
-   }
-   else
-   {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-   }
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-   app.UseHttpsRedirection();
-   app.UseStaticFiles();
-   app.UseSpaStaticFiles();
+        public IConfiguration Configuration { get; }
 
-   app.UseRouting();
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
 
-   app.UseEndpoints(endpoints =>
-   {
-    endpoints.MapControllerRoute(
-                 name: "default",
-                 pattern: "{controller}/{action=Index}/{id?}");
-   });
+            services.AddControllersWithViews();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MeetingTimer", Version = "v1" });
 
-   app.UseSpa(spa =>
-   {
-    spa.Options.SourcePath = "ClientApp";
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
 
-    if (env.IsDevelopment())
-    {
-     spa.UseReactDevelopmentServer(npmScript: "start");
+            // In production, the React files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+                configuration.RootPath = "ClientApp/build"
+            );
+
+            var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+            services.AddEntityFrameworkNpgsql().AddDbContext<MeetingTimerContext>(opt => opt.UseNpgsql(connectionString));
+
+            services.AddScoped<ISessionRepository, SessionRepository>();
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Meetingtimer v1");
+                    c.RoutePrefix = "api-documentation";
+                });
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
+            });
+        }
     }
-   });
-  }
- }
 }

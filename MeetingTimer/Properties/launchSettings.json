@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -12,7 +12,8 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_URL": "User ID=meetingtimer;Password=dfepostgres;Server=localhost;Port=5432;Database=meetingtimerDb;Integrated Security=true;Pooling=true;"
       }
     },
     "MeetingTimer": {
@@ -20,7 +21,8 @@
       "launchBrowser": true,
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DATABASE_URL": "User ID=meetingtimer;Password=dfepostgres;Server=localhost;Port=5432;Database=meetingtimerDb;Integrated Security=true;Pooling=true;"
       }
     }
   }

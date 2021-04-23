@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace MeetingTimer.Data.Migrations
+namespace MeetingTimer.Migrations
 {
     [DbContext(typeof(MeetingTimerContext))]
     partial class MeetingTimerContextModelSnapshot : ModelSnapshot
