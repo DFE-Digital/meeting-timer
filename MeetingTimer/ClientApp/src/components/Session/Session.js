@@ -16,6 +16,7 @@ const Session = () => {
     }
     setLoading(false);
     console.log('test');
+    console.log('test');
   };
 
   const showMessage = () => {
