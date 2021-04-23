@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AccordionItem from '../components/AccordionItem';
-import useGovUKFrontend from '../utils/initialiseComponent'
+import AccordionItem from '../../components/AccordionItem';
+import useGovUKFrontend from '../../hooks/useGovUKFrontend';
 
 const About = () => {
-  const inputEl = useGovUKFrontend();
+  const ref = useGovUKFrontend();
 
   return (
-    <div className="govuk-width-container" ref={inputEl}>
+    <div className="govuk-width-container" ref={ref}>
       <Link to="/" className="govuk-back-link">
         Back
       </Link>
