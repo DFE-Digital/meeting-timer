@@ -23,6 +23,10 @@ resource cloudfoundry_app web_app {
     route = cloudfoundry_route.web_app_route.id
   }
   environment = local.app_environment
+
+  service_binding {
+    service_instance = cloudfoundry_service_instance.postgres_instance.id
+  }
 }
 
 resource cloudfoundry_route web_app_route {
