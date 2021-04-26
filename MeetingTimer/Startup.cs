@@ -46,8 +46,7 @@ namespace MeetingTimer
             );
 
             //var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
-            //var connectionString = Helpers.DbConfiguration.GenerateConnectionString();
-            var connectionString = "User ID=meetingtimer;Password=dfepostgres;Server=localhost;Port=5432;Database=meetingtimerDb;Integrated Security=true;Pooling=true;";
+            var connectionString = Helpers.DbConfiguration.GenerateConnectionString();
             services.AddEntityFrameworkNpgsql().AddDbContext<MeetingTimerDbContext>(opt => opt.UseNpgsql(connectionString));
 
             services.AddScoped<ISessionRepository, SessionRepository>();

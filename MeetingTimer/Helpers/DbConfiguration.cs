@@ -24,33 +24,33 @@ namespace MeetingTimer.Helpers
         {
             var defaultConnectionString = "User ID=meetingtimer;Password=dfepostgres;Server=localhost;Port=5432;Database=meetingtimerDb;Integrated Security=true;Pooling=true;";
 
-            var vcapJson = Environment.GetEnvironmentVariable("VCAP_SERVICES");
+            //var vcapJson = Environment.GetEnvironmentVariable("VCAP_SERVICES");
 
-            if (vcapJson != null)
-            {
-                var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-                VcapServices vcapServices = JsonSerializer.Deserialize<VcapServices>(vcapJson, options);
+            //if (vcapJson != null)
+            //{
+            //    var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+            //    VcapServices vcapServices = JsonSerializer.Deserialize<VcapServices>(vcapJson, options);
 
 
-                var postgres = vcapServices.Postgres.First();
+            //    var postgres = vcapServices.Postgres.First();
 
-                var builder = new NpgsqlConnectionStringBuilder
-                {
-                    Host = postgres.Credentials.Host,
-                    Database = postgres.Credentials.Name,
-                    Username = postgres.Credentials.Username,
-                    Password = postgres.Credentials.Password,
-                    Port = postgres.Credentials.Port,
-                    SslMode = SslMode.Require,
-                    TrustServerCertificate = true,
-                };
+            //    var builder = new NpgsqlConnectionStringBuilder
+            //    {
+            //        Host = postgres.Credentials.Host,
+            //        Database = postgres.Credentials.Name,
+            //        Username = postgres.Credentials.Username,
+            //        Password = postgres.Credentials.Password,
+            //        Port = postgres.Credentials.Port,
+            //        SslMode = SslMode.Require,
+            //        TrustServerCertificate = true,
+            //    };
 
-                return builder.ConnectionString;
-            }
-            else
-            {
+            //    return builder.ConnectionString;
+            //}
+            //else
+            //{
                 return defaultConnectionString;
-            }
+            //}
         }
 
         public void Migrate()
