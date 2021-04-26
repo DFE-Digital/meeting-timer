@@ -22,23 +22,35 @@ namespace MeetingTimer.Helpers
 
         public static string GenerateConnectionString()
         {
-            var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-            VcapServices vcapServices = JsonSerializer.Deserialize<VcapServices>(Environment.GetEnvironmentVariable("VCAP_SERVICES"), options);
+            var defaultConnectionString = "User ID=meetingtimer;Password=dfepostgres;Server=localhost;Port=5432;Database=meetingtimerDb;Integrated Security=true;Pooling=true;";
 
-            var postgres = vcapServices.Postgres.First();
+            var vcapJson = Environment.GetEnvironmentVariable("VCAP_SERVICES");
 
-            var builder = new NpgsqlConnectionStringBuilder
+            if (vcapJson != null)
             {
-                Host = postgres.Credentials.Host,
-                Database = postgres.Credentials.Name,
-                Username = postgres.Credentials.Username,
-                Password = postgres.Credentials.Password,
-                Port = postgres.Credentials.Port,
-                SslMode = SslMode.Require,
-                TrustServerCertificate = true,
-            };
+                var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+                VcapServices vcapServices = JsonSerializer.Deserialize<VcapServices>(vcapJson, options);
 
-            return builder.ConnectionString;
+
+                var postgres = vcapServices.Postgres.First();
+
+                var builder = new NpgsqlConnectionStringBuilder
+                {
+                    Host = postgres.Credentials.Host,
+                    Database = postgres.Credentials.Name,
+                    Username = postgres.Credentials.Username,
+                    Password = postgres.Credentials.Password,
+                    Port = postgres.Credentials.Port,
+                    SslMode = SslMode.Require,
+                    TrustServerCertificate = true,
+                };
+
+                return builder.ConnectionString;
+            }
+            else
+            {
+                return defaultConnectionString;
+            }
         }
 
         public void Migrate()
