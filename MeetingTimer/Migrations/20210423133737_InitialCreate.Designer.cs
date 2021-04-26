@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MeetingTimer.Migrations
 {
-    [DbContext(typeof(MeetingTimerContext))]
+    [DbContext(typeof(MeetingTimerDbContext))]
     [Migration("20210423133737_InitialCreate")]
     partial class InitialCreate
     {

@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MeetingTimer.Migrations
 {
-    [DbContext(typeof(MeetingTimerContext))]
+    [DbContext(typeof(MeetingTimerDbContext))]
     partial class MeetingTimerContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
