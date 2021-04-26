@@ -78,9 +78,9 @@ namespace MeetingTimer
 
             app.UseRouting();
 
-            //using var serviceScope = app.ApplicationServices.CreateScope();
-            //var dbConfiguration = serviceScope.ServiceProvider.GetRequiredService<DbConfiguration>();
-            //dbConfiguration.Migrate();            
+            using var serviceScope = app.ApplicationServices.CreateScope();
+            var dbConfiguration = serviceScope.ServiceProvider.GetRequiredService<DbConfiguration>();
+            dbConfiguration.Migrate();            
 
             app.UseEndpoints(endpoints =>
             {
