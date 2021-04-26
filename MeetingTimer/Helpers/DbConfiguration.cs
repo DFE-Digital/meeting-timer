@@ -26,13 +26,12 @@ namespace MeetingTimer.Helpers
 
             var vcapJson = Environment.GetEnvironmentVariable("VCAP_SERVICES");
 
-            if (vcapJson != null)
+            var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+            VcapServices vcapServices = JsonSerializer.Deserialize<VcapServices>(vcapJson, options);
+
+            if (vcapServices.Postgres != null)
             {
-                var options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-                VcapServices vcapServices = JsonSerializer.Deserialize<VcapServices>(vcapJson, options);
-
-
-                var postgres = vcapServices.Postgres.First();
+                var postgres = vcapServices.Postgres?.FirstOrDefault();
 
                 var builder = new NpgsqlConnectionStringBuilder
                 {
@@ -47,6 +46,7 @@ namespace MeetingTimer.Helpers
 
                 return builder.ConnectionString;
             }
+
             else
             {
                 return defaultConnectionString;
