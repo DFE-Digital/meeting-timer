@@ -28,7 +28,7 @@ namespace MeetingTimer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<DbConfiguration, DbConfiguration>();
+            //services.AddScoped<DbConfiguration, DbConfiguration>();
 
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
@@ -78,9 +78,9 @@ namespace MeetingTimer
 
             app.UseRouting();
 
-            using var serviceScope = app.ApplicationServices.CreateScope();
-            var dbConfiguration = serviceScope.ServiceProvider.GetRequiredService<DbConfiguration>();
-            dbConfiguration.Migrate();            
+            //using var serviceScope = app.ApplicationServices.CreateScope();
+            //var dbConfiguration = serviceScope.ServiceProvider.GetRequiredService<DbConfiguration>();
+            //dbConfiguration.Migrate();            
 
             app.UseEndpoints(endpoints =>
             {
