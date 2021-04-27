@@ -1,5 +1,6 @@
 import React from 'react';
 import Session from '../../components/Session';
+import Timer from '../../components/Timer';
 
 const Home = () => (
   <div className="govuk-width-container">
@@ -8,6 +9,8 @@ const Home = () => (
         <div className="govuk-grid-column-two-thirds">
           <h1 className="govuk-heading-xl">Start a session</h1>
           <Session />
+          <Timer time={10000}
+          />
         </div>
       </div>
     </main>

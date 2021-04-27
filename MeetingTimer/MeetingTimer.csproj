@@ -31,6 +31,8 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\assets\" />
+    <Folder Include="ClientApp\src\components\NewFolder1\" />
+    <Folder Include="ClientApp\src\components\NewFolder\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
