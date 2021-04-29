@@ -33,6 +33,7 @@ namespace MeetingTimer.Helpers
             {
                 var postgres = vcapServices.Postgres?.FirstOrDefault();
 
+                //Disable SSL for running database locally
                 var builder = new NpgsqlConnectionStringBuilder
                 {
                     Host = postgres.Credentials.Host,
