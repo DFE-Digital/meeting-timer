@@ -1,6 +1,7 @@
 import React from 'react';
 import Session from '../../components/Session';
 import Timer from '../../components/Timer';
+import CountdownTimer from '../../components/CountdownTimer';
 
 const Home = () => (
   <div className="govuk-width-container">
@@ -11,6 +12,7 @@ const Home = () => (
           <Session />
           <Timer time={10000}
           />
+          <CountdownTimer/>
         </div>
       </div>
     </main>
