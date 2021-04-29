@@ -6,7 +6,7 @@ const Home = () => (
     <main className="govuk-main-wrapper">
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-two-thirds">
-          <h1 className="govuk-heading-xl">Start a session</h1>
+          <h1 className="govuk-heading-xl">Start a session - Test change hello</h1>
           <Session />
         </div>
       </div>
