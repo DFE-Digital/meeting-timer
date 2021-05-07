@@ -63,8 +63,9 @@ then connecting to the service once logged into the correct space (e.g. `dfe-tim
 
 You should then receive a list of the credentials for the PostgreSQL backing service, with which you must update the `VCAP_SERVICES` environment variable in `launchSettings.json`:
 
-```{\"postgres\": [{\"instance_name\": \"rdsbroker_277c8858_eb3a_427b_99ed_0f4f4171701e\",\"credentials\": {\"host\": \"127.0.0.1\",\"name\": \"rdsbroker_277c8858_eb3a_427b_99ed_0f4f4171701e\",\"username\": \"******\",\"password\": \"******\",\"port\": \"7080\"}}]}```
-
+```bash
+{\"postgres\": [{\"instance_name\": \"rdsbroker_277c8858_eb3a_427b_99ed_0f4f4171701e\",\"credentials\": {\"host\": \"127.0.0.1\",\"name\": \"rdsbroker_277c8858_eb3a_427b_99ed_0f4f4171701e\",\"username\": \"******\",\"password\": \"******\",\"port\": \"7080\"}}]}
+```
 
 ### React
 
