@@ -13,7 +13,6 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        //"DATABASE_URL": "User ID=meetingtimer;Password=dfepostgres;Server=localhost;Port=5432;Database=meetingtimerDb;Integrated Security=true;Pooling=true;",
         "VCAP_SERVICES": "{\"postgres\":[{\"credentials\":{\"host\":\"localhost\",\"name\":\"meetingtimerDb\",\"password\":\"dfepostgres\",\"port\":5432,\"username\":\"meetingtimer\"},\"instance_name\":\"SERVICE_NAME\"}]}"
       }
     },
@@ -23,7 +22,6 @@
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        //"DATABASE_URL": "User ID=meetingtimer;Password=dfepostgres;Server=localhost;Port=5432;Database=meetingtimerDb;Integrated Security=true;Pooling=true;",
         "VCAP_SERVICES": "{\"postgres\":[{\"credentials\":{\"host\":\"localhost\",\"name\":\"meetingtimerDb\",\"password\":\"dfepostgres\",\"port\":5432,\"username\":\"meetingtimer\"},\"instance_name\":\"SERVICE_NAME\"}]}"
       }
     }

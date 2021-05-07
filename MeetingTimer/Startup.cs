@@ -45,7 +45,6 @@ namespace MeetingTimer
                 configuration.RootPath = "ClientApp/build"
             );
 
-            //var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
             var connectionString = Helpers.DbConfiguration.GenerateConnectionString();
             services.AddEntityFrameworkNpgsql().AddDbContext<MeetingTimerDbContext>(opt => opt.UseNpgsql(connectionString));
 
