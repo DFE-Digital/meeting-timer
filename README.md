@@ -57,13 +57,13 @@ You may also run the app locally and connect to a Gov PaaS hosted PostgreSQL ser
 
 `cf install-plugin conduit`
 
-then connecting to the service:
+then connecting to the service once logged into the correct space (e.g. `dfe-timer-dev`):
 
 `cf conduit SERVICE_NAME`
 
 You should then receive a list of the credentials for the PostgreSQL backing service, with which you must update the `VCAP_SERVICES` environment variable in `launchSettings.json`:
 
-`{\"postgres\": [{\"instance_name\": \"rdsbroker_277c8858_eb3a_427b_99ed_0f4f4171701e\",\"credentials\": {\"host\": \"127.0.0.1\",\"name\": \"rdsbroker_277c8858_eb3a_427b_99ed_0f4f4171701e\",\"username\": \"******\",\"password\": \"******\",\"port\": \"7080\"}}]}`
+```{\"postgres\": [{\"instance_name\": \"rdsbroker_277c8858_eb3a_427b_99ed_0f4f4171701e\",\"credentials\": {\"host\": \"127.0.0.1\",\"name\": \"rdsbroker_277c8858_eb3a_427b_99ed_0f4f4171701e\",\"username\": \"******\",\"password\": \"******\",\"port\": \"7080\"}}]}```
 
 
 ### React
