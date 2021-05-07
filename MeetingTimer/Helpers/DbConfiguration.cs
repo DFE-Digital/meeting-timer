@@ -36,7 +36,7 @@ namespace MeetingTimer.Helpers
                 Username = postgres.Credentials.Username,
                 Password = postgres.Credentials.Password,
                 Port = postgres.Credentials.Port,
-                SslMode = SslMode.Require,
+                SslMode = SslMode.Prefer,
                 TrustServerCertificate = true,
             };
 
