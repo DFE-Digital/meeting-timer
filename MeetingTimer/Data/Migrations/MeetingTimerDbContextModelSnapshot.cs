@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace MeetingTimer.Migrations
+namespace MeetingTimer.Data.Migrations
 {
     [DbContext(typeof(MeetingTimerDbContext))]
-    partial class MeetingTimerContextModelSnapshot : ModelSnapshot
+    partial class MeetingTimerDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

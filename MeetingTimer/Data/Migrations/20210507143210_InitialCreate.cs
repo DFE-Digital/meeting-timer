@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace MeetingTimer.Migrations
+namespace MeetingTimer.Data.Migrations
 {
     public partial class InitialCreate : Migration
     {
