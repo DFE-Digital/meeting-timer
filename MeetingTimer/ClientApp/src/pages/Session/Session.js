@@ -1,14 +1,13 @@
 import React from 'react';
+import Timer from '../../components/Timer';
 
 const Session = (props) => {
-  const { match } = props;
-  const {
-    params: { id },
-  } = match;
+  const { timeInSeconds } = props;
 
   return (
     <div className="govuk-width-container">
-      <h1>hi {id}</h1>
+      <h1 className="govuk-heading-xl">Timer set</h1>
+      <Timer timeInSeconds={timeInSeconds} />
     </div>
   );
 };
