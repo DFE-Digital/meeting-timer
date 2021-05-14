@@ -9,7 +9,7 @@ const Home = () => (
         <div className="govuk-grid-column-two-thirds">
           <h1 className="govuk-heading-xl">Start a session</h1>
           <Session />
-          <Timer/>
+          <Timer timeInSeconds={120} />
         </div>
       </div>
     </main>

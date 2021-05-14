@@ -1,34 +1,40 @@
 import React from 'react';
-// import Countdown from 'react-countdown';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 const renderTime = ({ remainingTime }) => {
-  if (remainingTime === 0) {
-    return <div className="timer">Break over!</div>;
-  }
+  const SECONDS_IN_MINUTE = 60;
 
-  return (
-    <div className="timer">
-      <div className="text">Remaining</div>
-      <div className="value">
-        {Math.floor(remainingTime / 60)}:{remainingTime % 60}
+  const calculateMinutes = (time) => Math.floor(time / SECONDS_IN_MINUTE);
+
+  const calculateSeconds = (time) => time % SECONDS_IN_MINUTE;
+
+  const padSeconds = (seconds) => (seconds < 10 ? `0${seconds}` : seconds);
+
+  return remainingTime === 0 ? (
+    <p>Break over!</p>
+  ) : (
+    <div>
+      <p>Remaining</p>
+      <div>
+        {calculateMinutes(remainingTime)}:
+        {padSeconds(calculateSeconds(remainingTime))}
       </div>
     </div>
   );
 };
 
-const Timer = () => {
+const Timer = (props) => {
+  const { timeInSeconds } = props;
+
   return (
-    <div className="App">
-      <CountdownCircleTimer
-        isPlaying
-        duration={120}
-        colors={[['#004777', 0.33], ['#F7B801', 0.33], ['#A30000']]}
-        onComplete={() => [true, 1000]}
-      >
-        {renderTime}
-      </CountdownCircleTimer>
-    </div>
+    <CountdownCircleTimer
+      isPlaying
+      duration={timeInSeconds}
+      colors={[['#004777', 0.33], ['#F7B801', 0.33], ['#A30000']]}
+    >
+      {renderTime}
+    </CountdownCircleTimer>
   );
 };
+
 export default Timer;
