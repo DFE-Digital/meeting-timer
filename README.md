@@ -26,6 +26,7 @@ dotnet ef --version
 
 Clone the project:
 
+f
 ```bash
 git clone https://github.com/DFE-Digital/meeting-timer.git
 ```
