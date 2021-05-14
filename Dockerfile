@@ -12,8 +12,12 @@ COPY MeetingTimer/ ./
 
 # Build and publish
 RUN dotnet publish -c release -o out
+# RUN dotnet tool install --global dotnet-ef
+# ENV PATH="${PATH}:/root/.dotnet/tools"
+# RUN dotnet ef database update
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 COPY --from=build-env /app/out .
+
 ENTRYPOINT ["dotnet", "MeetingTimer.dll"]
 ENV ASPNETCORE_URLS=http://+:8080

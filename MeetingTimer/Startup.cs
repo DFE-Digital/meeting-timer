@@ -1,9 +1,11 @@
 using MeetingTimer.Data;
+using MeetingTimer.Helpers;
 using MeetingTimer.Repositories;
 using MeetingTimer.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +28,7 @@ namespace MeetingTimer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<DbConfiguration, DbConfiguration>();
 
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
@@ -42,7 +45,8 @@ namespace MeetingTimer
                 configuration.RootPath = "ClientApp/build"
             );
 
-            services.AddDbContext<MeetingTimerContext>();
+            var connectionString = Helpers.DbConfiguration.GenerateConnectionString();
+            services.AddEntityFrameworkNpgsql().AddDbContext<MeetingTimerDbContext>(opt => opt.UseNpgsql(connectionString));
 
             services.AddScoped<ISessionRepository, SessionRepository>();
         }
@@ -72,6 +76,10 @@ namespace MeetingTimer
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            using var serviceScope = app.ApplicationServices.CreateScope();
+            var dbConfiguration = serviceScope.ServiceProvider.GetRequiredService<DbConfiguration>();
+            dbConfiguration.Migrate();            
 
             app.UseEndpoints(endpoints =>
             {

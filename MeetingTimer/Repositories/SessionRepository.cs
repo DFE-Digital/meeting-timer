@@ -7,9 +7,9 @@ namespace MeetingTimer.Repositories
 {
     public class SessionRepository : ISessionRepository
     {
-        private readonly MeetingTimerContext _context;
+        private readonly MeetingTimerDbContext _context;
 
-        public SessionRepository(MeetingTimerContext context)
+        public SessionRepository(MeetingTimerDbContext context)
         {
             _context = context;
         }

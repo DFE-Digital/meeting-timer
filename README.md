@@ -39,6 +39,33 @@ Restore the .NET project dependencies:
 ```bash
 dotnet restore
 ```
+### Cloudfoundry CLI
+
+In order to deploy applications or backing services to Gov PaaS manually, check their status, or connect to Gov PaaS hosted backing services from an app running locally, you must install the [Cloudfoundry CLI](https://github.com/cloudfoundry/cli/wiki/V7-CLI-Installation-Guide).
+
+See the [Gov PaaS Get Started](https://docs.cloud.service.gov.uk/get_started.html#get-started) guide on how to use the CF CLI to interact with Gov PaaS.
+
+### Database
+
+This app uses a PostgreSQL database to persist Hosts, Members and Sessions. The database connection string is constructed using the VCAP_SERVICES environment variable (see `DbConfiguration.cs`).
+
+Upon submission of a PR, a review instance of the app and a PostgreSQL service are automatically created in Gov PaaS and bound to each other - this sets the `VCAP_SERVICES` automatically.
+
+If you wish to run the app locally and connect to a locally hosted database, you should first install PostgreSQL and create a database before updating the `VCAP_SERVICES` environment variable in `launchSettings.json` with the correct credentials for your database.
+
+You may also run the app locally and connect to a Gov PaaS hosted PostgreSQL service by installing the Conduit plugin for Cloudfoundry. Using the command line:
+
+`cf install-plugin conduit`
+
+then connecting to the service once logged into the correct space (e.g. `dfe-timer-dev`):
+
+`cf conduit SERVICE_NAME`
+
+You should then receive a list of the credentials for the PostgreSQL backing service, with which you must update the `VCAP_SERVICES` environment variable in `launchSettings.json`:
+
+```bash
+{\"postgres\": [{\"instance_name\": \"rdsbroker_277c8858_eb3a_427b_99ed_0f4f4171701e\",\"credentials\": {\"host\": \"127.0.0.1\",\"name\": \"rdsbroker_277c8858_eb3a_427b_99ed_0f4f4171701e\",\"username\": \"******\",\"password\": \"******\",\"port\": \"7080\"}}]}
+```
 
 ### React
 

@@ -1,0 +1,33 @@
+version: "3.6"
+services:
+  db:
+    image: postgres:9.6-alpine
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      PG_CONNECTION_STRING: Username=postgres;Password=devpassword;Host=localhost;Port=5432;Database=MeetingTimerDb
+  redis:
+    image: redis:alpine
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: meeting-timer
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      - SERVICE_TYPE=web
+      - DB_HOSTNAME=db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=devpassword
+      - DB_DATABASE=MeetingTimerDb
+      - DB_PORT=5432
+      - REDIS_URL=redis://redis:6379/1
+    env_file:
+      - .env
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && npm start -b 0.0.0.0"
+volumes:
+  db_data:

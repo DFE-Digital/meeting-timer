@@ -1,0 +1,5 @@
+---
+RACK_ENV: production
+NODE_ENV: production
+SERVICE_TYPE: web
+DATABASE_URL: postgres://postgres@localhost:5432
